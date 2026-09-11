@@ -2,9 +2,9 @@
 
 > **Credits and Attribution**
 >
-> The original code and tool are the work of **Eternity**. This repository is a separate project based on that original work and is not intended to claim ownership or authorship of the original tool.
+> The original code and tool are the work of **eterniti**. This repository is a separate project based on that original work and is not intended to claim ownership or authorship of the original tool.
 >
-> **All credits for the original tool, its code, and the original work belong to Eternity.**
+> **All credits for the original tool, its code, and the original work belong to eterniti.**
 >
 > This project is maintained separately and contains modifications and additions made specifically for this project.
 
