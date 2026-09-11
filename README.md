@@ -67,8 +67,6 @@ emotool3/
 │   ├── tinyxml/         # third-party XML parser
 │   └── vs/              # MSVC compatibility headers (e.g. dirent.h)
 └── BuildExtra/          # extra files copied to the output folder after build
-    ├── Debug/           # Debug configuration-specific files
-    └── Release/         # Release configuration-specific files
 ```
 
 ## Troubleshooting
