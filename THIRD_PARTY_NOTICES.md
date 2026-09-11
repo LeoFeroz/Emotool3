@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-This project (© 2016 Eternity) is distributed under the **PolyForm
+This project ([Eternity](https://github.com/eterniti)) is distributed under the **PolyForm
 Noncommercial License 1.0.0** (see the `LICENSE` file). Before using,
 modifying, or redistributing this software, please also read the notices
 below — they cover parts of the project that are **not** owned by
