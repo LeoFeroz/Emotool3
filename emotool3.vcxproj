@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{50F18083-DBF5-4A44-8D47-F554C099AA16}</ProjectGuid>
+    <RootNamespace>emotool3</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <!-- Auto-detecção do FBX SDK: só entra em ação se FBXSDK_DIR não vier
+         definida por fora (env var ou /p:FBXSDK_DIR=... no msbuild/CI).
+         Testa as pastas padrão de instalação do instalador da Autodesk,
+         da versão mais nova para a mais antiga. -->
+    <FBXSDK_DIR Condition="'$(FBXSDK_DIR)'=='' AND Exists('C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.10')">C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.10</FBXSDK_DIR>
+    <FBXSDK_DIR Condition="'$(FBXSDK_DIR)'=='' AND Exists('C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.7')">C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.7</FBXSDK_DIR>
+    <FBXSDK_DIR Condition="'$(FBXSDK_DIR)'=='' AND Exists('C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1')">C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1</FBXSDK_DIR>
+    <FBXSDK_DIR Condition="'$(FBXSDK_DIR)'=='' AND Exists('C:\fbxsdk')">C:\fbxsdk</FBXSDK_DIR>
+    <!-- Último recurso: mantém o valor antigo como default, mesmo sem existir,
+         só pra não quebrar a expansão da variável em outro lugar do projeto. -->
+    <FBXSDK_DIR Condition="'$(FBXSDK_DIR)'==''">C:\fbxsdk</FBXSDK_DIR>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\emotool3\</IntDir>
+    <TargetName>emotool3</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(FBXSDK_DIR)\include;%(AdditionalIncludeDirectories)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(FBXSDK_DIR)\include;%(AdditionalIncludeDirectories)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <!-- Debug -->
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FBXSDK_SHARED;_CRT_SECURE_NO_WARNINGS;TIXML_USE_STL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>sssscommon;sssscommon\vs;$(FBXSDK_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(FBXSDK_DIR)\lib\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <!-- Release -->
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;FBXSDK_SHARED;_CRT_SECURE_NO_WARNINGS;TIXML_USE_STL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>sssscommon;sssscommon\vs;$(FBXSDK_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(FBXSDK_DIR)\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <!-- Source Files -->
+  <ItemGroup>
+    <ClCompile Include="emotool3\main.cpp" />
+    <ClCompile Include="emotool3\debug.cpp" />
+    <ClCompile Include="sssscommon\tinyxml\tinystr.cpp" />
+    <ClCompile Include="sssscommon\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="sssscommon\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="sssscommon\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="sssscommon\BaseFile.cpp" />
+    <ClCompile Include="sssscommon\EmbFile.cpp" />
+    <ClCompile Include="sssscommon\EmgFile.cpp" />
+    <ClCompile Include="sssscommon\EmmFile.cpp" />
+    <ClCompile Include="sssscommon\EmoFile.cpp" />
+    <ClCompile Include="sssscommon\SkeletonFile.cpp" />
+    <ClCompile Include="sssscommon\Utils.cpp" />
+    <ClCompile Include="sssscommon\EmaFile.cpp" />
+    <ClCompile Include="sssscommon\2ryFile.cpp" />
+  </ItemGroup>
+  <!-- Header Files -->
+  <ItemGroup>
+    <ClInclude Include="sssscommon\tinyxml\tinystr.h" />
+    <ClInclude Include="sssscommon\tinyxml\tinyxml.h" />
+    <ClInclude Include="sssscommon\BaseFile.h" />
+    <ClInclude Include="sssscommon\common.h" />
+    <ClInclude Include="sssscommon\debug.h" />
+    <ClInclude Include="sssscommon\EmbFile.h" />
+    <ClInclude Include="sssscommon\EmgFile.h" />
+    <ClInclude Include="sssscommon\EmmFile.h" />
+    <ClInclude Include="sssscommon\EmoFile.h" />
+    <ClInclude Include="sssscommon\SkeletonFile.h" />
+    <ClInclude Include="sssscommon\Utils.h" />
+    <ClInclude Include="sssscommon\EmaFile.h" />
+    <ClInclude Include="sssscommon\2ryFile.h" />
+    <ClInclude Include="sssscommon\vs\dirent.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <!-- Copy Runtime Files -->
+  <!-- Copy Runtime Files -->
+  <ItemGroup>
+    <!-- Arquivos comuns: soltos direto em BuildExtra\, fora de qualquer
+         subpasta Debug\/Release\. Vão para toda configuração. -->
+    <BuildExtraFilesCommon Include="$(MSBuildProjectDirectory)\BuildExtra\*.*" />
+    <!-- Arquivos específicos da configuração atual: só dentro de
+         BuildExtra\$(Configuration)\. A pasta da OUTRA configuração
+         (ex: Release\ enquanto builda Debug) nunca entra aqui. -->
+    <BuildExtraFilesConfig Include="$(MSBuildProjectDirectory)\BuildExtra\$(Configuration)\**\*.*" Condition="Exists('$(MSBuildProjectDirectory)\BuildExtra\$(Configuration)')" />
+  </ItemGroup>
+  <Target Name="CopyRuntimeFiles" AfterTargets="Build">
+    <Copy SourceFiles="$(FBXSDK_DIR)\lib\x64\$(Configuration)\libfbxsdk.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" Condition="Exists('$(FBXSDK_DIR)\lib\x64\$(Configuration)\libfbxsdk.dll')" />
+    <!-- Fallback: se não existir uma libfbxsdk.dll de Debug separada (comum,
+         já que o FBX SDK normalmente só distribui a DLL de Release), usa a
+         de Release mesmo em builds Debug. -->
+    <Copy SourceFiles="$(FBXSDK_DIR)\lib\x64\Release\libfbxsdk.dll" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" Condition="'$(Configuration)'=='Debug' AND !Exists('$(FBXSDK_DIR)\lib\x64\Debug\libfbxsdk.dll')" />
+    <Copy SourceFiles="@(BuildExtraFilesCommon)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(BuildExtraFilesConfig)" DestinationFiles="@(BuildExtraFilesConfig->'$(TargetDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

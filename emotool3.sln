@@ -1,0 +1,22 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "emotool3", "emotool3.vcxproj", "{50F18083-DBF5-4A44-8D47-F554C099AA16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50F18083-DBF5-4A44-8D47-F554C099AA16}.Debug|x64.ActiveCfg = Debug|x64
+		{50F18083-DBF5-4A44-8D47-F554C099AA16}.Debug|x64.Build.0 = Debug|x64
+		{50F18083-DBF5-4A44-8D47-F554C099AA16}.Release|x64.ActiveCfg = Release|x64
+		{50F18083-DBF5-4A44-8D47-F554C099AA16}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
